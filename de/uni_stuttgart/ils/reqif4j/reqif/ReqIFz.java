@@ -8,12 +8,6 @@ import java.util.zip.ZipInputStream;
 
 public class ReqIFz extends ReqIFFile {
 
-    private String path;
-    private String name;
-    private int numberOfReqIFDocuments = 0;
-    private Map<String, ReqIFDocument> reqifDocuments = new HashMap<>();
-    private Map<String, Map<String, InputStream>> picturesInReqIFDocument = new HashMap<>();
-
     public ReqIFz(String filePath) throws IOException {
         File destDir = new File(filePath + "_unzipped"); // Extract to a separate directory
         if (!destDir.exists() && !destDir.mkdirs()) {

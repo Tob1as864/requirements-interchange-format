@@ -117,7 +117,9 @@ public class ReqIFCoreContent {
 						
 						case ReqIFConst.XHTML: 			this.dataTypes.put(dataTypeID, new DatatypeXHTML(dataTypeID, dataTypeName));
 														break;
+
 						case ReqIFConst.DATE:			this.dataTypes.put(dataTypeID, new DatatypeDate(dataTypeID, dataTypeName));
+														break;
 											
 						default:						this.dataTypes.put(null, new Datatype(dataTypeID, dataTypeName, ReqIFConst.UNDEFINED));
 														break;

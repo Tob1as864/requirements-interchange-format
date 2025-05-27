@@ -5,8 +5,11 @@ public class AttributeValueInteger extends AttributeValue {
 	
 	public AttributeValueInteger(String value, AttributeDefinition type) {
 		super(value, type);
-		
-		this.value = Integer.parseInt(value);
+		if(value == null){
+			this.value = 0;
+		}else {
+			this.value = Integer.parseInt(value);
+		}
 	}
 
 	@Override
