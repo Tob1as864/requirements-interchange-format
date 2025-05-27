@@ -5,16 +5,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.uni_stuttgart.ils.reqif4j.datatypes.*;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import de.uni_stuttgart.ils.reqif4j.datatypes.Datatype;
-import de.uni_stuttgart.ils.reqif4j.datatypes.DatatypeBoolean;
-import de.uni_stuttgart.ils.reqif4j.datatypes.DatatypeEnumeration;
-import de.uni_stuttgart.ils.reqif4j.datatypes.DatatypeInteger;
-import de.uni_stuttgart.ils.reqif4j.datatypes.DatatypeString;
-import de.uni_stuttgart.ils.reqif4j.datatypes.DatatypeXHTML;
 import de.uni_stuttgart.ils.reqif4j.specification.SpecHierarchy;
 import de.uni_stuttgart.ils.reqif4j.specification.SpecObject;
 import de.uni_stuttgart.ils.reqif4j.specification.SpecObjectType;
@@ -122,6 +117,7 @@ public class ReqIFCoreContent {
 						
 						case ReqIFConst.XHTML: 			this.dataTypes.put(dataTypeID, new DatatypeXHTML(dataTypeID, dataTypeName));
 														break;
+						case ReqIFConst.DATE:			this.dataTypes.put(dataTypeID, new DatatypeDate(dataTypeID, dataTypeName));
 											
 						default:						this.dataTypes.put(null, new Datatype(dataTypeID, dataTypeName, ReqIFConst.UNDEFINED));
 														break;

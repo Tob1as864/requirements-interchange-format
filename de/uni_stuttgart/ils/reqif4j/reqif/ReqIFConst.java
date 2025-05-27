@@ -47,6 +47,7 @@ public class ReqIFConst {
 	public final static String STRING = "STRING";
 	public final static String ENUMERATION = "ENUMERATION";
 	public final static String XHTML = "XHTML";
+	public final static String DATE = "DATE";
 	public final static String UNDEFINED = "UNDEFINED";
 	
 	public final static String REQ = "REQ";

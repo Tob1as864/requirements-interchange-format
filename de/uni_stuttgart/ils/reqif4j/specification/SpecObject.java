@@ -3,17 +3,11 @@ package de.uni_stuttgart.ils.reqif4j.specification;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.uni_stuttgart.ils.reqif4j.attributes.*;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import de.uni_stuttgart.ils.reqif4j.attributes.AttributeDefinition;
-import de.uni_stuttgart.ils.reqif4j.attributes.AttributeValue;
-import de.uni_stuttgart.ils.reqif4j.attributes.AttributeValueBoolean;
-import de.uni_stuttgart.ils.reqif4j.attributes.AttributeValueEnumeration;
-import de.uni_stuttgart.ils.reqif4j.attributes.AttributeValueInteger;
-import de.uni_stuttgart.ils.reqif4j.attributes.AttributeValueString;
-import de.uni_stuttgart.ils.reqif4j.attributes.AttributeValueXHTML;
 import de.uni_stuttgart.ils.reqif4j.reqif.ReqIFConst;
 
 public class SpecObject {
@@ -180,6 +174,14 @@ public class SpecObject {
 							
 						case ReqIFConst.XHTML:			this.attributeValues.put(attributeDefinitionName, new AttributeValueXHTML(attribute, attributeDefinition));
 														break;
+
+						case ReqIFConst.DATE:			if(attribute.getAttributes().getNamedItem(ReqIFConst.THE_VALUE) !=null) {
+															attributeValue = attribute.getAttributes().getNamedItem(ReqIFConst.THE_VALUE).getTextContent();
+														}else{
+															attributeValue = "";
+														}
+														this.attributeValues.put(attributeDefinitionName, new AttributeValueDate(attributeValue, attributeDefinition));
+														break;
 												
 						default:						break;
 					}
@@ -191,8 +193,7 @@ public class SpecObject {
 			
 			for(AttributeDefinition attributeDefinition: specType.getAttributeDefinitions().values()) {
 				
-				if(!this.attributeValues.containsKey(attributeDefinition.getName())) { 
-					
+				if(!this.attributeValues.containsKey(attributeDefinition.getName())) {
 					switch(attributeDefinition.getDataType().getType()) {
 					
 						case ReqIFConst.BOOLEAN:		this.attributeValues.put(attributeDefinition.getName(), new AttributeValueBoolean(attributeDefinition.getDefaultValue(), attributeDefinition));
@@ -209,6 +210,8 @@ public class SpecObject {
 						
 						case ReqIFConst.XHTML:			this.attributeValues.put(attributeDefinition.getName(), new AttributeValueXHTML(attributeDefinition.getDefaultValue(), attributeDefinition));
 														break;
+
+						case ReqIFConst.DATE:			this.attributeValues.put(attributeDefinition.getName(), new AttributeValueDate(attributeDefinition.getDefaultValue(), attributeDefinition));
 											
 						default:						break;
 					}

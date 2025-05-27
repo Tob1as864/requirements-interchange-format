@@ -26,6 +26,9 @@ public class DatatypeEnumeration extends Datatype {
 	}
 	
 	public String getEnumValueName(String id) {
+		if(this.enumValues.get(id) == null) {
+			return null;
+		}
 		return this.enumValues.get(id).getName();
 	}
 	

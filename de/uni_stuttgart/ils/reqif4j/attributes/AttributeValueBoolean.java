@@ -6,7 +6,7 @@ public class AttributeValueBoolean extends AttributeValue {
 	public AttributeValueBoolean(String value, AttributeDefinition type) {
 		super(value, type);
 		
-		if(value.toLowerCase().equals("true")) {
+		if(value != null && value.toLowerCase().equals("true")) {
 			this.value = true;
 		}else{
 			this.value = false;

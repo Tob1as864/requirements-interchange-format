@@ -3,15 +3,10 @@ package de.uni_stuttgart.ils.reqif4j.specification;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import de.uni_stuttgart.ils.reqif4j.attributes.*;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import de.uni_stuttgart.ils.reqif4j.attributes.AttributeDefinition;
-import de.uni_stuttgart.ils.reqif4j.attributes.AttributeDefinitionBoolean;
-import de.uni_stuttgart.ils.reqif4j.attributes.AttributeDefinitionEnumeration;
-import de.uni_stuttgart.ils.reqif4j.attributes.AttributeDefinitionInteger;
-import de.uni_stuttgart.ils.reqif4j.attributes.AttributeDefinitionString;
-import de.uni_stuttgart.ils.reqif4j.attributes.AttributeDefinitionXHTML;
 import de.uni_stuttgart.ils.reqif4j.datatypes.Datatype;
 import de.uni_stuttgart.ils.reqif4j.datatypes.DatatypeEnumeration;
 import de.uni_stuttgart.ils.reqif4j.reqif.ReqIFConst;
@@ -50,7 +45,10 @@ public class SpecType {
 	public String getEnumValueName(String id) {
 		
 		for(AttributeDefinition attributeDefinition: this.attributeDefinitions.values()) {
-			
+			//Falls noch keine Klasse für diese Attributsdefinition definiert ist
+			if(attributeDefinition.getDataType() == null){
+				continue;
+			}
 			if(attributeDefinition.getDataType().getClass().equals(DatatypeEnumeration.class)) {
 				
 				if(((DatatypeEnumeration)attributeDefinition.getDataType()).getEnumValueName(id) != null) {
@@ -100,8 +98,10 @@ public class SpecType {
 		this.id = specType.getAttributes().getNamedItem(ReqIFConst.IDENTIFIER).getTextContent();
 		this.name = specType.getAttributes().getNamedItem(ReqIFConst.LONG_NAME).getTextContent();
 		this.type = ReqIFConst.UNDEFINED;
-		
-		if(specType.getChildNodes().getLength() > 0) {
+
+		//Doors relationship definitionen habe keine ChildNodes
+		if(specType.getChildNodes().getLength() > 0 && !(specType.getChildNodes().item(1) == null)) {
+
 			NodeList attributeDefinitions = specType.getChildNodes().item(1).getChildNodes();
 
 			for(int specatt = 0; specatt < attributeDefinitions.getLength(); specatt++) {
@@ -127,6 +127,8 @@ public class SpecType {
 														break;
 											
 						case ReqIFConst.XHTML:			this.attributeDefinitions.put(attDefID, new AttributeDefinitionXHTML(attributeDefinition, dataTypes));
+														break;
+						case ReqIFConst.DATE:			this.attributeDefinitions.put(attDefID, new AttributeDefinitionDate(attributeDefinition, dataTypes));
 														break;
 											
 						default:						this.attributeDefinitions.put(attDefID, new AttributeDefinition(attributeDefinition, dataTypes));

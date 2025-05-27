@@ -37,12 +37,13 @@ public class AttributeValueXHTML extends AttributeValue {
 		
 		AttributeValueXHTMLElementList xhtmlElementList = new AttributeValueXHTMLElementList();
 		
-		Node div = ((Element)xhtmlContent).getElementsByTagName("xhtml:div").item(0);
+		Node div = ((Element)xhtmlContent).getElementsByTagName(XHTML.DIV).item(0);
 		
 		for(int e=0; e < div.getChildNodes().getLength(); e++) {
 			Node xhtmlElement = div.getChildNodes().item(e);
 			String elementName = div.getChildNodes().item(e).getNodeName();
-			if(elementName.contains("xhtml:")) {
+			xhtmlElementList.add(elementName, decostructXHTMLElement(elementName, xhtmlElement));
+			/*if(elementName.contains("xhtml:")) {
 				if(elementName.endsWith("p")) {
 					xhtmlElementList.add("P",decostructXHTMLElement("P", xhtmlElement));
 				}else if(elementName.endsWith("table")) {
@@ -54,7 +55,7 @@ public class AttributeValueXHTML extends AttributeValue {
 				}else if(elementName.contains("object")) {
 					xhtmlElementList.add("OBJ",decostructXHTMLElement("OBJ", xhtmlElement));
 				}
-			}
+			}*/
 		}
 		return xhtmlElementList;
 	}
