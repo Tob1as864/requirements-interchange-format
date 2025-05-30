@@ -12,7 +12,12 @@ import de.uni_stuttgart.ils.reqif4j.xhtml.XHTMLElementDiv;
 public class AttributeValueXHTML extends AttributeValue {
 	
 	XHTMLElementDiv divValue;
-	
+
+	@Override
+	public Object getValue() {
+		return divValue.toString();
+	}
+
 	public AttributeValueXHTML(Node xhtmlContent, AttributeDefinition type) {
 		super(type);
 		
