@@ -6,17 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import de.uni_stuttgart.ils.reqif4j.datatypes.*;
+import de.uni_stuttgart.ils.reqif4j.specification.*;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import de.uni_stuttgart.ils.reqif4j.specification.SpecHierarchy;
-import de.uni_stuttgart.ils.reqif4j.specification.SpecObject;
-import de.uni_stuttgart.ils.reqif4j.specification.SpecObjectType;
-import de.uni_stuttgart.ils.reqif4j.specification.SpecRelationType;
-import de.uni_stuttgart.ils.reqif4j.specification.SpecType;
-import de.uni_stuttgart.ils.reqif4j.specification.Specification;
-import de.uni_stuttgart.ils.reqif4j.specification.SpecificationType;
 
 public class ReqIFCoreContent {
 	
@@ -24,6 +17,7 @@ public class ReqIFCoreContent {
 	private Map<String, Datatype> dataTypes = new LinkedHashMap<String, Datatype>();
 	private Map<String, SpecType> specTypes = new LinkedHashMap<String, SpecType>();
 	private Map<String, SpecObject> specObjects = new LinkedHashMap<String, SpecObject>();
+	private Map<String, SpecRelation> specRelation = new LinkedHashMap<>();
 	private Map<String, Specification> specifications = new LinkedHashMap<String, Specification>();
 	
 	
@@ -51,6 +45,12 @@ public class ReqIFCoreContent {
 	
 	public SpecObject getSpecObject(String id) {
 		return this.specObjects.get(id);
+	}
+	public Map<String, SpecRelation> getSpecRelation(){
+		return this.specRelation;
+	}
+	public SpecRelation getSpecRelation(String id){
+		return this.specRelation.get(id);
 	}
 	
 	public Map<String, Specification> getSpecifications() {
@@ -176,7 +176,19 @@ public class ReqIFCoreContent {
 			}
 		}
 		
-		
+
+		if(coreContent.getElementsByTagName(ReqIFConst.SPEC_RELATION).getLength() > 0){
+			NodeList specRelations = coreContent.getElementsByTagName(ReqIFConst.SPEC_RELATION);
+			for(int specrelation = 0; specrelation < specRelations.getLength(); specrelation++) {
+
+				Node specRelation = specRelations.item(specrelation);
+				String specRelID = specRelation.getAttributes().getNamedItem(ReqIFConst.IDENTIFIER).getTextContent();
+				String specRelTypeRef = ((Element)specRelation).getElementsByTagName(ReqIFConst.SPEC_RELATION_TYPE_REF).item(0).getTextContent();
+
+
+				this.specRelation.put(specRelID, new SpecRelation(specRelation, this.specTypes.get(specRelTypeRef)));
+			}
+		}
 		
 		
 		if(coreContent.getElementsByTagName(ReqIFConst.SPECIFICATION).getLength() > 0) {
@@ -186,7 +198,7 @@ public class ReqIFCoreContent {
 				
 				Node specification = specifications.item(spec);
 				String specID = specification.getAttributes().getNamedItem(ReqIFConst.IDENTIFIER).getTextContent();
-				String specTypeRef = ((Element)specification).getElementsByTagName(ReqIFConst.SPECIFICATION_TYPE_REF).item(0).getTextContent();
+				String specTypeRef = ((Element)specification).getElementsByTagName(ReqIFConst.SPEC_TYPE_REF).item(0).getTextContent();
 				
 				this.specifications.put(specID, new Specification(specification, this.specTypes.get(specTypeRef), this.specObjects));
 			}

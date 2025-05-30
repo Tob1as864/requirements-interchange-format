@@ -20,6 +20,10 @@ public class ReqIFConst {
 	public final static String SPEC_TYPES = "SPEC-TYPES";
 	public final static String SPEC_OBJECTS = "SPEC-OBJECTS";
 	public final static String SPEC_OBJECT = "SPEC-OBJECT";
+	public final static String SPEC_RELATIONS = "SPEC-RELATIONS";
+	public final static String SPEC_RELATION = "SPEC-RELATION";
+	public final static String SOURCE = "SOURCE";
+	public final static String TARGET = "TARGET";
 	public final static String SPEC_HIERARCHY = "SPEC-HIERARCHY";
 	public final static String CHILDREN = "CHILDREN";
 	public final static String OBJECT = "OBJECT";
@@ -39,8 +43,9 @@ public class ReqIFConst {
 	public final static String SPEC_OBJECT_TYPE = "SPEC-OBJECT-TYPE";
 	public final static String SPEC_OBJECT_REF = "SPEC-OBJECT-REF";
 	public final static String SPEC_RELATION_TYPE = "SPEC-RELATION-TYPE";
+	public final static String SPEC_RELATION_TYPE_REF = "SPEC-RELATION-TYPE-REF";
 	public final static String SPEC_OBJECT_TYPE_REF = "SPEC-OBJECT-TYPE-REF";
-	public final static String SPECIFICATION_TYPE_REF = "SPECIFICATION-TYPE-REF";
+	public final static String SPEC_TYPE_REF = "SPECIFICATION-TYPE-REF";
 	
 	public final static String BOOLEAN = "BOOLEAN";
 	public final static String INTEGER = "INTEGER";

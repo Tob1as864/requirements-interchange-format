@@ -13,10 +13,10 @@ import de.uni_stuttgart.ils.reqif4j.reqif.ReqIFConst;
 public class SpecObject {
 	
 	
-	private String id;
-	private SpecType specType;
-	private String type;
-	private Map<String, AttributeValue> attributeValues = new HashMap<String, AttributeValue>();
+	protected String id;
+	protected SpecType specType;
+	protected String type;
+	protected Map<String, AttributeValue> attributeValues = new HashMap<String, AttributeValue>();
 	
 	
 	
@@ -104,7 +104,9 @@ public class SpecObject {
 	}
 	
 	
-	
+	public SpecObject(Node specObject){
+		this.id = specObject.getAttributes().getNamedItem(ReqIFConst.IDENTIFIER).getTextContent();
+	}
 	
 	public SpecObject(Node specObject, SpecType specType) {
 		
