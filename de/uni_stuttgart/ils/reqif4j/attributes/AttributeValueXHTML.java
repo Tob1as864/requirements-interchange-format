@@ -15,6 +15,9 @@ public class AttributeValueXHTML extends AttributeValue {
 
 	@Override
 	public Object getValue() {
+		if(divValue == null){
+			return "";
+		}
 		return divValue.toString();
 	}
 
