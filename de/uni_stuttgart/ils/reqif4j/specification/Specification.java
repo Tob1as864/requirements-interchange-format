@@ -75,10 +75,7 @@ public class Specification {
 
 	public List<SpecHierarchy> getChildren() {
 
-		List<SpecHierarchy> children = new ArrayList<SpecHierarchy>();
-		children.add((SpecHierarchy) this.children.values());
-
-		return children;
+        return new ArrayList<SpecHierarchy>(this.children.values());
 	}
 	
 	public List<SpecObject> getLvlOneSpecHierarchies() {
