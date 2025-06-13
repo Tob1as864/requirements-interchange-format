@@ -72,6 +72,14 @@ public class Specification {
 	public int getNumberOfSections() {
 		return this.sectionCounter;
 	}
+
+	public List<SpecHierarchy> getChildren() {
+
+		List<SpecHierarchy> children = new ArrayList<SpecHierarchy>();
+		children.add((SpecHierarchy) this.children.values());
+
+		return children;
+	}
 	
 	public List<SpecObject> getLvlOneSpecHierarchies() {
 		

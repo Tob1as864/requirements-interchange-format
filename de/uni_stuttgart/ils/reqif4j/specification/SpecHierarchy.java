@@ -129,7 +129,7 @@ public class SpecHierarchy {
 		}
 	}
 	
-	public List<SpecHierarchy> getDirectChildren() {
+	public List<SpecHierarchy> getChildren() {
 		
 		List<SpecHierarchy> children = new ArrayList<SpecHierarchy>();
 		children.add((SpecHierarchy) this.children.values());
